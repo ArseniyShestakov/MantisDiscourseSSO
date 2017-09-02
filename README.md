@@ -1,5 +1,7 @@
 # MantisDiscourseSSO
 
+License: GPLv2 or later
+
 Supported:
 
 * MantisBT 1.2.x
