@@ -34,4 +34,6 @@ git clone https://github.com/ArseniyShestakov/MantisDiscourseSSO.git /path/to/ma
         $g_send_reset_password = OFF;
         // Must be changed since default is login_page.php and that page will redirect to Discourse SSO
         $g_logout_redirect_page = 'view_all_bug_page.php';
+        // Users are created by SSO plugin with empty email
+        $g_allow_blank_email = ON;
 ```

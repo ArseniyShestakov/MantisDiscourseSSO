@@ -48,11 +48,11 @@ class MantisDiscourseSSOPlugin extends MantisPlugin
 			return;
 
 		$DISCOURSE_SSO->removeNonce($SSO_STATUS['nonce']);
-		print_r($SSO_STATUS);
 		$userId = user_get_id_by_name($SSO_STATUS['data']['username']);
 		if(false === $userId)
 		{
-			$userId = auth_auto_create_user($SSO_STATUS['data']['username'], '');
+			user_create($SSO_STATUS['data']['username'], '');
+			$userId = user_get_id_by_name($SSO_STATUS['data']['username']);
 			if(false === $userId)
 			{
 				trigger_error('Discourse SSO: cant create user!');
@@ -75,6 +75,9 @@ class MantisDiscourseSSOPlugin extends MantisPlugin
 	function loginPage()
 	{
 		if('login_page.php' !== basename($_SERVER['PHP_SELF']))
+			return;
+
+		if(DISCOURSE_SSO !== config_get('login_method'))
 			return;
 		
 		print_header_redirect('discourse-sso.php');
