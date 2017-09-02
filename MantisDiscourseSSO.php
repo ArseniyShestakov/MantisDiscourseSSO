@@ -57,13 +57,11 @@ class MantisDiscourseSSOPlugin extends MantisPlugin
 			{
 				trigger_error('Discourse SSO: cant create user!');
 			}
-			else
-			{
-				set_user_email($userId, $SSO_STATUS['data']['email']);
-				if(!empty($SSO_STATUS['data']['name']))
-					user_set_realname($userId, $SSO_STATUS['data']['name']);
-			}
 		}
+		user_set_email($userId, $SSO_STATUS['data']['email']);
+		if(!empty($SSO_STATUS['data']['name']))
+			user_set_realname($userId, $SSO_STATUS['data']['name']);
+
 		user_increment_login_count($userId);
 		user_reset_failed_login_count_to_zero($userId);
 		user_reset_lost_password_in_progress_count_to_zero($userId);
